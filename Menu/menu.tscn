@@ -1,0 +1,415 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://Modules/Menu/NewGameButton.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/kenney_mini.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Modules/Menu/Menu.gd" type="Script" id=3]
+[ext_resource path="res://Modules/Menu/blur.tres" type="Shader" id=4]
+[ext_resource path="res://Modules/Menu/AnimationControllerNode.gd" type="Script" id=5]
+[ext_resource path="res://Modules/Menu/InputControllerNode.gd" type="Script" id=6]
+
+[sub_resource type="Animation" id=13]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Control/MarginContainer/HBoxContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "hide_menu"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Control/MarginContainer/HBoxContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "show_menu"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Control/MarginContainer/HBoxContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=16]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control/BGFX/BlurColorRect:material:shader_param/blur_amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Control/BGFX:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "hide_blur"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control/BGFX/BlurColorRect:material:shader_param/blur_amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 2.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Control/BGFX:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "none"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control/BGFX:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "show_blur"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control/BGFX/BlurColorRect:material:shader_param/blur_amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 0.406126 ),
+"update": 0,
+"values": [ 0.0, 2.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Control/BGFX:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id=5]
+draw_center = false
+border_width_bottom = 2
+border_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+draw_center = false
+border_width_bottom = 2
+border_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+draw_center = false
+border_width_bottom = 2
+border_color = Color( 0.8, 0.8, 0.8, 0 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_bottom = 1
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+
+[sub_resource type="Theme" id=1]
+Button/colors/font_color_pressed = Color( 0, 0, 0, 0.501961 )
+Button/fonts/font = SubResource( 3 )
+Button/styles/disabled = SubResource( 4 )
+Button/styles/focus = SubResource( 5 )
+Button/styles/hover = SubResource( 6 )
+Button/styles/normal = SubResource( 7 )
+Button/styles/pressed = SubResource( 8 )
+HSeparator/constants/separation = 10
+Label/fonts/font = SubResource( 2 )
+ToolButton/styles/pressed = SubResource( 9 )
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = ExtResource( 4 )
+shader_param/blur_amount = 2.0
+
+[node name="Menu" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 3 )
+
+[node name="InputControllerNode" type="Node" parent="."]
+script = ExtResource( 6 )
+
+[node name="AnimationControllerNode" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="MainAnimationPlayer" type="AnimationPlayer" parent="AnimationControllerNode"]
+root_node = NodePath("../..")
+playback_speed = 6.0
+anims/RESET = SubResource( 13 )
+anims/hide_menu = SubResource( 14 )
+anims/show_menu = SubResource( 12 )
+
+[node name="BGFXAnimationPlayer" type="AnimationPlayer" parent="AnimationControllerNode"]
+root_node = NodePath("../..")
+playback_speed = 6.0
+anims/RESET = SubResource( 16 )
+anims/hide_blur = SubResource( 17 )
+anims/none = SubResource( 19 )
+anims/show_blur = SubResource( 18 )
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BGFX" type="Control" parent="Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BlurColorRect" type="ColorRect" parent="Control/BGFX"]
+material = SubResource( 10 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "0.0 fps"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 120.0
+margin_top = 40.0
+margin_bottom = -40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer"]
+margin_right = 904.0
+margin_bottom = 520.0
+
+[node name="MainMenuVBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/HBoxContainer"]
+margin_top = 209.0
+margin_right = 86.0
+margin_bottom = 311.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="NewGameButton" type="Button" parent="Control/MarginContainer/HBoxContainer/MainMenuVBoxContainer"]
+margin_right = 86.0
+margin_bottom = 22.0
+text = " new game "
+align = 0
+script = ExtResource( 1 )
+
+[node name="HSeparator" type="HSeparator" parent="Control/MarginContainer/HBoxContainer/MainMenuVBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 26.0
+margin_right = 86.0
+margin_bottom = 36.0
+
+[node name="OptionsButton" type="Button" parent="Control/MarginContainer/HBoxContainer/MainMenuVBoxContainer"]
+margin_top = 40.0
+margin_right = 70.0
+margin_bottom = 62.0
+size_flags_horizontal = 0
+text = " options "
+align = 0
+
+[node name="HSeparator2" type="HSeparator" parent="Control/MarginContainer/HBoxContainer/MainMenuVBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 66.0
+margin_right = 86.0
+margin_bottom = 76.0
+
+[node name="QuitButton" type="Button" parent="Control/MarginContainer/HBoxContainer/MainMenuVBoxContainer"]
+margin_top = 80.0
+margin_right = 40.0
+margin_bottom = 102.0
+size_flags_horizontal = 0
+text = " quit "
+align = 0
+
+[node name="VSeparator" type="VSeparator" parent="Control/MarginContainer/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 90.0
+margin_right = 140.0
+margin_bottom = 520.0
+custom_constants/separation = 50
+
+[node name="OptionsVBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/HBoxContainer"]
+visible = false
+margin_left = 144.0
+margin_top = 212.0
+margin_right = 234.0
+margin_bottom = 308.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/HBoxContainer/OptionsVBoxContainer"]
+margin_left = 26.0
+margin_right = 90.0
+margin_bottom = 20.0
+size_flags_horizontal = 8
+
+[node name="EffectsLabel" type="Label" parent="Control/MarginContainer/HBoxContainer/OptionsVBoxContainer/HBoxContainer"]
+margin_right = 64.0
+margin_bottom = 20.0
+text = "effects"
+
+[node name="HSeparator" type="HSeparator" parent="Control/MarginContainer/HBoxContainer/OptionsVBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 24.0
+margin_right = 90.0
+margin_bottom = 34.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/MarginContainer/HBoxContainer/OptionsVBoxContainer"]
+margin_top = 38.0
+margin_right = 90.0
+margin_bottom = 58.0
+size_flags_horizontal = 8
+
+[node name="FullscreenLabel" type="Label" parent="Control/MarginContainer/HBoxContainer/OptionsVBoxContainer/HBoxContainer2"]
+margin_right = 90.0
+margin_bottom = 20.0
+text = "fullscreen"
+
+[node name="HSeparator2" type="HSeparator" parent="Control/MarginContainer/HBoxContainer/OptionsVBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 62.0
+margin_right = 90.0
+margin_bottom = 72.0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control/MarginContainer/HBoxContainer/OptionsVBoxContainer"]
+margin_top = 76.0
+margin_right = 90.0
+margin_bottom = 96.0
+
+[node name="InputTypeLabel" type="Label" parent="Control/MarginContainer/HBoxContainer/OptionsVBoxContainer/HBoxContainer3"]
+margin_right = 84.0
+margin_bottom = 20.0
+text = "input type"
+
+[connection signal="finished_hiding_menu" from="AnimationControllerNode" to="." method="_on_AnimationControllerNode_finished_hiding_menu"]
+[connection signal="animation_finished" from="AnimationControllerNode/MainAnimationPlayer" to="AnimationControllerNode" method="_on_MainAnimationPlayer_animation_finished"]
+[connection signal="pressed" from="Control/MarginContainer/HBoxContainer/MainMenuVBoxContainer/NewGameButton" to="InputControllerNode" method="_on_NewGameButton_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/HBoxContainer/MainMenuVBoxContainer/QuitButton" to="InputControllerNode" method="_on_QuitButton_pressed"]

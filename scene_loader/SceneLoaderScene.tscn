@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Modules/scene_loader/swipe_fade.shader" type="Shader" id=1]
+[ext_resource path="res://Modules/scene_loader/SceneLoader.gd" type="Script" id=2]
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 1 )
+shader_param/percentage = 0.0
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/TextureRect:material:shader_param/percentage")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "fade_animation"
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/TextureRect:material:shader_param/percentage")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[node name="SceneLoader" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+material = SubResource( 3 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+flip_v = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 1 )
+anims/fade_animation = SubResource( 4 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
