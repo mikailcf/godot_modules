@@ -1,11 +1,11 @@
 class_name SceneLoader
-extends Node2D
+extends Node
 
 export(NodePath) var _node_path_to_replace
 
 var _stack = []
-var _node_to_remove: Node2D
-var _parent_to_remove_from: Node2D
+var _node_to_remove: Node
+var _parent_to_remove_from: Node
 
 func _ready():
 	add_to_group("scene_loader")

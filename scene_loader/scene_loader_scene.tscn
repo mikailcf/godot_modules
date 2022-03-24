@@ -37,7 +37,7 @@ tracks/0/keys = {
 "values": [ 0.0, 1.0 ]
 }
 
-[node name="SceneLoader" type="Node2D"]
+[node name="SceneLoader" type="Node"]
 script = ExtResource( 2 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
