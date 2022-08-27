@@ -1,3 +1,4 @@
+# needs to be autoloaded
 extends Node
 
 var game_root: GameRoot
