@@ -9,7 +9,8 @@ var _actions = {
 		"move_up": "move_up",
 		"move_down": "move_down",
 		"move_left": "move_left",
-		"move_right": "move_right"
+		"move_right": "move_right",
+		"attack": "attack"
 	},
 	"ui": {
 		"ui_up": "ui_up",
@@ -36,13 +37,15 @@ var _control_mapping = {
 			_actions.character.move_down: [KEY_DOWN],
 			_actions.character.move_up: [KEY_UP],
 			_actions.character.move_left: [KEY_LEFT],
-			_actions.character.move_right: [KEY_RIGHT]
+			_actions.character.move_right: [KEY_RIGHT],
+			_actions.character.attack: [KEY_X],
 		},
 		"joy_button": {
 			_actions.character.move_down: [JOY_DPAD_DOWN],
 			_actions.character.move_up: [JOY_DPAD_UP],
 			_actions.character.move_left: [JOY_DPAD_LEFT],
 			_actions.character.move_right: [JOY_DPAD_RIGHT],
+			_actions.character.attack: [JOY_SONY_X],
 		},
 		"joy_axis": {
 			_actions.character.move_left: [[JOY_AXIS_0, -1.0]],
@@ -124,8 +127,6 @@ func _change_context():
 		_current_context = "ui"
 	else:
 		_current_context = "character"
-
-	print(_current_context)
 	
 	_update_current_actions()
 
@@ -138,8 +139,15 @@ func _input(event: InputEvent) -> void:
 			if event.is_action_pressed(action):
 				accept_event()
 
+func _in_current_context(actions: Array):
+	for action in actions:
+		if not _current_actions.has(action):
+			return false
+	
+	return true
+
 func strength(action: String) -> float:
-	if not _current_actions.has(action):
+	if not _in_current_context([action]):
 		return 0.0
 
 	return Input.get_action_strength(action)
@@ -151,9 +159,9 @@ func vector(
 	vert_pos: String,
 	deadzone: float = -1.0):
 
-	for action in [hor_neg, hor_pos, vert_neg, vert_pos]:
-		if not _current_actions.has(action):
-			return Vector2()
+	var actions = [hor_neg, hor_pos, vert_neg, vert_pos]
+	if not _in_current_context(actions):
+		return Vector2()
 
 	return Input.get_vector(
 		hor_neg,
@@ -162,3 +170,21 @@ func vector(
 		vert_pos,
 		deadzone
 	)
+
+func pressed(action: String) -> bool:
+	if not _in_current_context([action]):
+		return false
+	
+	return Input.is_action_just_pressed(action)
+
+func released(action: String) -> bool:
+	if not _in_current_context([action]):
+		return false
+	
+	return Input.is_action_just_released(action)
+
+func down(action: String) -> bool:
+	if not _in_current_context([action]):
+		return false
+	
+	return Input.is_action_pressed(action)
