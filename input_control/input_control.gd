@@ -1,3 +1,4 @@
+class_name InputControl
 extends Control
 
 var _actions = {
@@ -17,7 +18,7 @@ var _actions = {
 	}
 }
 
-var _key_mapping = {
+var _control_mapping = {
 	"general": {
 		"key": {
 			_actions.general.pause: [KEY_ESCAPE]
@@ -53,14 +54,14 @@ var _key_mapping = {
 }
 
 var _current_mapping = {}
-var _general_mapping = _key_mapping.general
+var _general_mapping = _control_mapping.general
 var _current_context = "character"
 var _pressing = {}
 var _connected_joypads = {}
 var _deadzone = 0.1
 
 func _init() -> void:
-	_current_mapping = _key_mapping[_current_context]
+	_current_mapping = _control_mapping[_current_context]
 
 	for group in _actions.keys():
 		for action in _actions[group].keys():
@@ -83,8 +84,8 @@ func _on_joy_connection_changed(device_id, connected):
 	_connected_joypads[device_id] = connected
 
 func _add_inputs():
-	for context in _key_mapping.keys():
-		var key_actions = _key_mapping[context].get("key", {})
+	for context in _control_mapping.keys():
+		var key_actions = _control_mapping[context].get("key", {})
 
 		for action in key_actions.keys():
 			var action_keys = key_actions[action]
@@ -97,7 +98,7 @@ func _add_inputs():
 				ev.scancode = key
 				InputMap.action_add_event(action, ev)
 		
-		var joy_button_actions = _key_mapping[context]\
+		var joy_button_actions = _control_mapping[context]\
 			.get("joy_button", {})
 
 		for action in joy_button_actions.keys():
@@ -112,7 +113,7 @@ func _add_inputs():
 				InputMap.action_add_event(action, ev)
 
 
-		var joy_axis_actions = _key_mapping[context]\
+		var joy_axis_actions = _control_mapping[context]\
 			.get("joy_axis", {})
 
 		for action in joy_axis_actions.keys():
@@ -134,7 +135,7 @@ func _change_context():
 	else:
 		_current_context = "character"
 	
-	_current_mapping = _key_mapping[_current_context]
+	_current_mapping = _control_mapping[_current_context]
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
@@ -144,3 +145,21 @@ func _input(event: InputEvent) -> void:
 	# 	for action in _actions.ui.keys():
 	# 		if event.is_action_pressed(action):
 	# 			accept_event()
+
+static func strength(action: String) -> float:
+	return Input.get_action_strength(action)
+
+static func vector(
+	hor_neg: String,
+	hor_pos: String,
+	vert_neg: String,
+	vert_pos: String,
+	deadzone: float = -1.0):
+
+	return Input.get_vector(
+		hor_neg,
+		hor_pos,
+		vert_neg,
+		vert_pos,
+		deadzone
+	)
