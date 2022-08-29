@@ -69,7 +69,7 @@ func _init() -> void:
 			if not InputMap.has_action(action):
 				InputMap.add_action(action)
 
-func  _ready():
+func _ready():
 	Input.connect(
 		"joy_connection_changed",
 		self,
@@ -157,7 +157,7 @@ func vector(
 	hor_pos: String,
 	vert_neg: String,
 	vert_pos: String,
-	deadzone: float = -1.0):
+	deadzone: float = -1.0) -> Vector2:
 
 	var actions = [hor_neg, hor_pos, vert_neg, vert_pos]
 	if not _in_current_context(actions):
@@ -177,14 +177,14 @@ func pressed(action: String) -> bool:
 	
 	return Input.is_action_just_pressed(action)
 
-func released(action: String) -> bool:
-	if not _in_current_context([action]):
-		return false
-	
-	return Input.is_action_just_released(action)
-
 func down(action: String) -> bool:
 	if not _in_current_context([action]):
 		return false
 	
 	return Input.is_action_pressed(action)
+
+func released(action: String) -> bool:
+	if not _in_current_context([action]):
+		return false
+	
+	return Input.is_action_just_released(action)
