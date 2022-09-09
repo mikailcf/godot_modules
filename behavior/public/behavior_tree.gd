@@ -1,3 +1,4 @@
+class_name BehaviorTree, "../icons/tree.svg"
 extends Node
 
 enum ProcessMode {
@@ -19,17 +20,17 @@ onready var _blackboard = \
 
 func _ready():
 	assert(get_child_count() == 1, "Root node should have one child")
-	set_process_mode(self.process_mode)
+	set_process_mode(self._process_mode)
 
 func _process(delta: float):
 	tick(delta)
-  
+	
 func _physics_process(delta: float):
 	tick(delta)
 
 func tick(delta):
 	_blackboard.delta = delta
-	_root.tick(_agent, _blackboard, [], 0)
+	_root.tick(_agent, _blackboard)
 
 func enable():
 	_enabled = true

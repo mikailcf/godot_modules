@@ -1,4 +1,4 @@
-class_name BlackBoard
+class_name BlackBoard, "../icons/blackboard.svg"
 extends Node
 
 var _blackboard = {}

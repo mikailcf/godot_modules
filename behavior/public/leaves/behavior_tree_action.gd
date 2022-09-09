@@ -1,8 +1,8 @@
-class_name BehaviorTreeAction
-extends BehaviorTreeLeafWrap
+class_name BehaviorTreeAction, "../../icons/action.svg"
+extends BehaviorTreeLeaf
 
 func _tick(agent: Node, blackboard: BlackBoard) -> int:
-  if _child.has_method("do_action"):
-    return _child.do_action(agent, blackboard)
-  
+  return _do_action(agent, blackboard)
+
+func _do_action(_agent: Node, _blackboard: BlackBoard) -> int:
   return SUCCESS

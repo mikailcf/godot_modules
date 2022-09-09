@@ -1,4 +1,4 @@
-class_name BehaviorTreeWait
+class_name BehaviorTreeWait, "../../icons/wait.svg"
 extends BehaviorTreeLeaf
 
 export (float) var _wait_time: float = 1.0
