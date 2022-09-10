@@ -16,7 +16,7 @@ func _create_timer():
 	_timer.one_shot = true
 	add_child(_timer)
 
-func _tick(_agent: Node, _blackboard: BlackBoard) -> int:
+func _tick(_agent, _blackboard: BlackBoard) -> int:
 	if _triggered and _timer.is_stopped():
 		if not _one_shot:
 			_triggered = false
