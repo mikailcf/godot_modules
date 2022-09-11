@@ -14,7 +14,8 @@ func will_exit(_metadata: Dictionary):
 	pass
 
 func tick(agent, blackboard: BlackBoard) -> int:
-	return _tick(agent, blackboard)
+	var status = _tick(agent, blackboard)
+	return status
 
 func _tick(_agent, _blackboard: BlackBoard) -> int:
 	return SUCCESS
