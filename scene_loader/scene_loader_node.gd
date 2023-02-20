@@ -3,7 +3,7 @@ extends Node
 
 enum Storage { PUSH = 0, POP, REPLACE }
 
-@export var _new_scene_path # (String, FILE, "*.tscn")
+@export_file("*.tscn") var _new_scene_path
 
 func _scene_loader() -> SceneLoader:
 	return get_tree().get_nodes_in_group("scene_loader").front() as SceneLoader
