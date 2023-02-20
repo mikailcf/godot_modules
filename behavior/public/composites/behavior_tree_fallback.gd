@@ -1,9 +1,10 @@
-class_name BehaviorTreeFallback, "../../icons/fallback.svg"
+@icon("../../icons/fallback.svg")
+class_name BehaviorTreeFallback
 extends BehaviorTreeComposite
 
-export (bool) var _skip_previous_failure = false
+@export var _skip_previous_failure: bool = false
 
-onready var _failure_index = 0
+@onready var _failure_index = 0
 
 func _reset():
 	_failure_index = 0

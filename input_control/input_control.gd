@@ -41,17 +41,17 @@ var _control_mapping = {
 			_actions.character.attack: [KEY_X],
 		},
 		"joy_button": {
-			_actions.character.move_down: [JOY_DPAD_DOWN],
-			_actions.character.move_up: [JOY_DPAD_UP],
-			_actions.character.move_left: [JOY_DPAD_LEFT],
-			_actions.character.move_right: [JOY_DPAD_RIGHT],
-			_actions.character.attack: [JOY_SONY_X],
+			_actions.character.move_down: [JOY_BUTTON_DPAD_DOWN],
+			_actions.character.move_up: [JOY_BUTTON_DPAD_UP],
+			_actions.character.move_left: [JOY_BUTTON_DPAD_LEFT],
+			_actions.character.move_right: [JOY_BUTTON_DPAD_RIGHT],
+			_actions.character.attack: [],
 		},
 		"joy_axis": {
-			_actions.character.move_left: [[JOY_AXIS_0, -1.0]],
-			_actions.character.move_right: [[JOY_AXIS_0, 1.0]],
-			_actions.character.move_up: [[JOY_AXIS_1, -1.0]],
-			_actions.character.move_down: [[JOY_AXIS_1, 1.0]],
+			_actions.character.move_left: [[JOY_AXIS_LEFT_X, -1.0]],
+			_actions.character.move_right: [[JOY_AXIS_LEFT_X, 1.0]],
+			_actions.character.move_up: [[JOY_AXIS_LEFT_Y, -1.0]],
+			_actions.character.move_down: [[JOY_AXIS_LEFT_Y, 1.0]],
 		}
 	}
 }
@@ -61,7 +61,7 @@ var _general_mapping = _control_mapping.general
 var _current_context = "character"
 var _connected_joypads = {}
 
-func _init() -> void:
+func _init():
 	_update_current_actions()
 
 	for group in _actions.keys():
@@ -70,11 +70,12 @@ func _init() -> void:
 				InputMap.add_action(action)
 
 func _ready():
-	Input.connect(
-		"joy_connection_changed",
-		self,
-		"_on_joy_connection_changed"
-	)
+	Input.joy_connection_changed.connect(_on_joy_connection_changed)
+#	Input.connect(
+#		"joy_connection_changed",
+#		self,
+#		"_on_joy_connection_changed"
+#	)
 
 	for joypad in Input.get_connected_joypads():
 		_connected_joypads[joypad] = true
@@ -94,7 +95,7 @@ func _event_for_input(input_type: String, input):
 	match input_type:
 		"key":
 			event = InputEventKey.new()
-			event.scancode = input
+			event.keycode = input
 		"joy_button":
 			event = InputEventJoypadButton.new()
 			event.button_index = input

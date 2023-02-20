@@ -1,14 +1,15 @@
-class_name BehaviorTreeWait, "../../icons/wait.svg"
+@icon("../../icons/wait.svg")
+class_name BehaviorTreeWait
 extends BehaviorTreeLeaf
 
-export (float) var _wait_time: float = 1.0
-export (bool) var _one_shot: bool = false
+@export var _wait_time: float = 1.0
+@export var _one_shot: bool = false
 
 var _timer: Timer
 var _triggered = false
 
 func _ready() -> void:
-	._ready()
+	super._ready()
 	_create_timer()
 
 func _create_timer():
@@ -27,5 +28,3 @@ func _tick(_agent, _blackboard: BlackBoard) -> int:
 		_timer.start(_wait_time)
 
 	return RUNNING
-
-

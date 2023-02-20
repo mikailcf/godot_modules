@@ -1,4 +1,5 @@
-class_name BehaviorTreeInverter, "../../icons/inverter.svg"
+@icon("../../icons/inverter.svg")
+class_name BehaviorTreeInverter
 extends BehaviorTreeDecorator
 
 func _tick(_agent, _blackboard) -> int:

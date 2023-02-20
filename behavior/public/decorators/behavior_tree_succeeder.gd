@@ -1,4 +1,5 @@
-class_name BehaviorTreeSucceeder, "../../icons/succeeder.svg"
+@icon("../../icons/succeeder.svg")
+class_name BehaviorTreeSucceeder
 extends BehaviorTreeDecorator
 
 func _tick(_agent, _blackboard) -> int:

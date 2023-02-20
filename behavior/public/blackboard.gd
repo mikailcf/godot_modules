@@ -1,25 +1,26 @@
-class_name BlackBoard, "../icons/blackboard.svg"
+@icon("../icons/blackboard.svg")
+class_name BlackBoard
 extends Node
 
 var _blackboard = {}
 var delta: float
 
-func set(key, value, scope = 'default'):
+func set_value(key, value, scope = 'default'):
 	if not _blackboard.has(scope):
 		_blackboard[scope] = {}
 
 	_blackboard[scope][key] = value
 
-func get(key, default_value = null, scope = 'default'):
-	if has(key, scope):
+func get_value(key, default_value = null, scope = 'default'):
+	if has_value(key, scope):
 		return _blackboard[scope].get(key, default_value)
 	return default_value
 
-func has(key, scope = 'default'):
+func has_value(key, scope = 'default'):
 	return _blackboard.has(scope) \
 		and _blackboard[scope].has(key) \
 		and _blackboard[scope][key] != null
 
-func erase(key, scope = 'default'):
+func erase_value(key, scope = 'default'):
 	if _blackboard.has(scope):
-		 _blackboard[scope][key] = null
+		_blackboard[scope][key] = null

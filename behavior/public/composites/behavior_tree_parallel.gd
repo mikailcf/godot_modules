@@ -1,4 +1,5 @@
-class_name BehaviorTreeParallel, "../../icons/parallel.svg"
+@icon("../../icons/parallel.svg")
+class_name BehaviorTreeParallel
 extends BehaviorTreeComposite
 
 func _tick(_agent, _blackboard):

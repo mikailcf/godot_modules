@@ -1,7 +1,7 @@
 class_name SceneLoader
 extends Node
 
-export(NodePath) var _node_path_to_replace
+@export var _node_path_to_replace: NodePath
 
 var _stack = []
 var _node_to_remove: Node
@@ -11,14 +11,14 @@ func _ready():
 	add_to_group("scene_loader")
 
 func _node_from_scene(scene_path) -> Node:
-	return load(scene_path).instance()
+	return load(scene_path).instantiate()
 
 func _change_to_scene_node(new_scene_node: Node, animated: bool):
 	_node_to_remove = get_node(_node_path_to_replace)
 	_parent_to_remove_from = _node_to_remove.get_parent()
 
-	get_viewport().set_clear_mode(Viewport.CLEAR_MODE_ONLY_NEXT_FRAME)
-	yield(VisualServer, "frame_post_draw")
+	get_viewport().set_clear_mode(SubViewport.CLEAR_MODE_ONCE)
+	await RenderingServer.frame_post_draw
 	var img = get_viewport().get_texture().get_data()
 
 	var tex = ImageTexture.new()
@@ -39,7 +39,7 @@ func push_scene(new_scene_path: String, animated: bool):
 	change_to_scene(new_scene_path, animated)
 
 func pop_scene(animated: bool):
-	if _stack.empty():
+	if _stack.is_empty():
 		return
 
 	_change_to_scene_node(_stack.back(), animated)

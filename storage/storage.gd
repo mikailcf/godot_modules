@@ -4,7 +4,7 @@ extends Node
 const file_prefix = "user://save"
 
 static func save_data(slot: int, data: Dictionary) -> void:
-	var json = JSON.print(data, "  ")
+	var json = JSON.stringify(data, "  ")
 	var file = File.new()
 	var filename = file_prefix + str(slot)
 	
@@ -23,7 +23,9 @@ static func load_data(slot: int) -> Dictionary:
 
 	var input = file.get_as_text()
 	file.close()
-	var data: Dictionary = JSON.parse(input).result
+	var test_json_conv = JSON.new()
+	test_json_conv.parse(input).result
+	var data: Dictionary = test_json_conv.get_data()
 	return data
 
 static func save_options():

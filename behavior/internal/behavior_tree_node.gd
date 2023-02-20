@@ -7,8 +7,8 @@ enum {
 	RUNNING,
 }
 
-onready var _og_name = name
-onready var _running_name = "X  " + name
+@onready var _og_name = name
+@onready var _running_name = "X  " + name
 
 func will_exit(_metadata: Dictionary):
 	pass

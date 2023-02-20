@@ -1,4 +1,5 @@
-class_name BehaviorTreeAction, "../../icons/action.svg"
+@icon("../../icons/action.svg")
+class_name BehaviorTreeAction
 extends BehaviorTreeLeaf
 
 func _tick(agent, blackboard: BlackBoard) -> int:

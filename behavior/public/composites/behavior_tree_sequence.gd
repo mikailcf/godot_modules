@@ -1,9 +1,10 @@
-class_name BehaviorTreeSequence, "../../icons/sequence.svg"
+@icon("../../icons/sequence.svg")
+class_name BehaviorTreeSequence
 extends BehaviorTreeComposite
 
-export (bool) var _skip_previous_success = true
+@export var _skip_previous_success: bool = true
 
-onready var _successful_index = 0
+@onready var _successful_index = 0
 
 func _reset():
 	_successful_index = 0
