@@ -9,6 +9,7 @@ var _parent_to_remove_from: Node
 
 func _ready():
 	add_to_group("scene_loader")
+	unique_name_in_owner = true
 
 func _node_from_scene(scene_path) -> Node:
 	return load(scene_path).instantiate()
@@ -17,12 +18,11 @@ func _change_to_scene_node(new_scene_node: Node, animated: bool):
 	_node_to_remove = get_node(_node_path_to_replace)
 	_parent_to_remove_from = _node_to_remove.get_parent()
 
-	get_viewport().set_clear_mode(SubViewport.CLEAR_MODE_ONCE)
 	await RenderingServer.frame_post_draw
-	var img = get_viewport().get_texture().get_data()
-
-	var tex = ImageTexture.new()
-	tex.create_from_image(img)
+	var img = get_viewport().get_texture().get_image()
+	img.flip_y()
+	
+	var tex = ImageTexture.create_from_image(img)
 
 	$CanvasLayer/TextureRect.texture = tex
 
