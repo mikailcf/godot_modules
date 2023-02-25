@@ -1,10 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://cpqteevbc2fbs"]
+[gd_scene load_steps=24 format=3 uid="uid://cpqteevbc2fbs"]
 
 [ext_resource type="Script" path="res://modules/menu/new_game_button.gd" id="1"]
 [ext_resource type="FontFile" uid="uid://b71ypvfcn1gve" path="res://assets/fonts/kenney_mini.ttf" id="2"]
 [ext_resource type="Script" path="res://modules/menu/menu.gd" id="3"]
-[ext_resource type="Shader" path="res://modules/menu/blur.tres" id="4"]
 [ext_resource type="Script" path="res://modules/menu/animation_controller_node.gd" id="5"]
+[ext_resource type="Material" uid="uid://bnf4haf01a5cj" path="res://modules/menu/blur_material.tres" id="5_0ju6v"]
 [ext_resource type="Script" path="res://modules/menu/input_controller_node.gd" id="6"]
 
 [sub_resource type="Animation" id="13"]
@@ -260,9 +260,6 @@ Button/styles/pressed = SubResource("9")
 HSeparator/constants/separation = 10
 Label/fonts/font = SubResource("2")
 
-[sub_resource type="ShaderMaterial" id="10"]
-shader = ExtResource("4")
-
 [node name="Menu" type="CanvasLayer"]
 process_mode = 2
 script = ExtResource("3")
@@ -301,7 +298,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="BlurColorRect" type="ColorRect" parent="Control/BGFX"]
-material = SubResource("10")
+material = ExtResource("5_0ju6v")
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0

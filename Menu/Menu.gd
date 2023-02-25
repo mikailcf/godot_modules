@@ -1,4 +1,5 @@
-class_name Menu extends CanvasLayer
+class_name Menu
+extends CanvasLayer
 
 signal start_new_game
 

@@ -8,19 +8,22 @@ var _previous_duration: float
 
 func show_menu(animated: bool, bgfx: int = 0, duration: float = -1.0):
 	_bgfx = bgfx
+	
+	var playback_speed = 1.0
 
 	if not duration == -1:
-		_previous_duration = $MainAnimationPlayer.playback_speed
-		$MainAnimationPlayer.playback_speed = 1.0 / duration
-		$BGFXAnimationPlayer.playback_speed = 1.0 / duration
+		playback_speed = 1.0 / duration
+#		_previous_duration = $MainAnimationPlayer.get_playing_speed()
+#		$MainAnimationPlayer.set_playing_speed(1.0 / duration)
+#		$BGFXAnimationPlayer.set_playing_speed(1.0 / duration)
 
-	$MainAnimationPlayer.play("show_menu")
+	$MainAnimationPlayer.play("show_menu", -1, playback_speed)
 
 	match bgfx:
 		0:
-			$BGFXAnimationPlayer.play("none")
+			$BGFXAnimationPlayer.play("none", -1, playback_speed)
 		1:
-			$BGFXAnimationPlayer.play("show_blur")
+			$BGFXAnimationPlayer.play("show_blur", -1, playback_speed)
 
 	if not animated:
 		var animation_time = $MainAnimationPlayer.get_animation("show_menu").length
@@ -29,17 +32,20 @@ func show_menu(animated: bool, bgfx: int = 0, duration: float = -1.0):
 
 func hide_menu(animated, duration: float = -1.0):
 	$MainAnimationPlayer.play("hide_menu")
+	
+	var playback_speed = 1.0
 
 	if not duration == -1:
-		_previous_duration = $MainAnimationPlayer.playback_speed
-		$MainAnimationPlayer.playback_speed = 1.0 / duration
-		$BGFXAnimationPlayer.playback_speed = 1.0 / duration
+		playback_speed = 1.0 / duration
+#		_previous_duration = $MainAnimationPlayer.get_playing_speed()
+#		$MainAnimationPlayer.set_playing_speed(1.0 / duration)
+#		$BGFXAnimationPlayer.set_playing_speed(1.0 / duration)
 
 	match _bgfx:
 		0:
-			$BGFXAnimationPlayer.play("none")
+			$BGFXAnimationPlayer.play("none", -1, playback_speed)
 		1:
-			$BGFXAnimationPlayer.play("hide_blur")
+			$BGFXAnimationPlayer.play("hide_blur", -1, playback_speed)
 
 	if not animated:
 		var animation_time = $MainAnimationPlayer.get_animation("hide_menu").length
@@ -48,8 +54,8 @@ func hide_menu(animated, duration: float = -1.0):
 
 
 func _on_MainAnimationPlayer_animation_finished(anim_name: String) -> void:
-	$MainAnimationPlayer.playback_speed = _previous_duration
-	$BGFXAnimationPlayer.playback_speed = _previous_duration
+#	$MainAnimationPlayer.set_playing_speed(_previous_duration)
+#	$BGFXAnimationPlayer.set_playing_speed(_previous_duration)
 
 	if anim_name == "hide_menu":
 		emit_signal("finished_hiding_menu")
