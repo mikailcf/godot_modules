@@ -13,6 +13,9 @@ func _ready():
 	_update_camera_distance()
 
 func _physics_process(delta: float) -> void:
+	if not _target_node:
+		return
+
 	var from := transform.origin
 	var to = _target_node.transform.origin
 
