@@ -13,9 +13,6 @@ func show_menu(animated: bool, bgfx: int = 0, duration: float = -1.0):
 
 	if not duration == -1:
 		playback_speed = 1.0 / duration
-#		_previous_duration = $MainAnimationPlayer.get_playing_speed()
-#		$MainAnimationPlayer.set_playing_speed(1.0 / duration)
-#		$BGFXAnimationPlayer.set_playing_speed(1.0 / duration)
 
 	$MainAnimationPlayer.play("show_menu", -1, playback_speed)
 
@@ -37,9 +34,6 @@ func hide_menu(animated, duration: float = -1.0):
 
 	if not duration == -1:
 		playback_speed = 1.0 / duration
-#		_previous_duration = $MainAnimationPlayer.get_playing_speed()
-#		$MainAnimationPlayer.set_playing_speed(1.0 / duration)
-#		$BGFXAnimationPlayer.set_playing_speed(1.0 / duration)
 
 	match _bgfx:
 		0:
@@ -54,11 +48,10 @@ func hide_menu(animated, duration: float = -1.0):
 
 
 func _on_MainAnimationPlayer_animation_finished(anim_name: String) -> void:
-#	$MainAnimationPlayer.set_playing_speed(_previous_duration)
-#	$BGFXAnimationPlayer.set_playing_speed(_previous_duration)
+	pass
 
-	if anim_name == "hide_menu":
-		emit_signal("finished_hiding_menu")
-
-	if anim_name == "show_menu":
-		emit_signal("finished_showing_menu")
+#	if anim_name == "hide_menu":
+#		emit_signal("finished_hiding_menu")
+#
+#	if anim_name == "show_menu":
+#		emit_signal("finished_showing_menu")
