@@ -56,15 +56,13 @@ class NodeInterpolation:
 	
 	func _init(node: Node, path: NodePath, to: Variant,
 		duration: float, curve: Tween.TransitionType = Tween.TRANS_LINEAR,
-		ease: Tween.EaseType = Tween.EASE_IN_OUT,
-		callback: Callable = Callable()):
+		ease: Tween.EaseType = Tween.EASE_IN_OUT):
 		_path = path
 		_to = to
 		_ease = ease
 		_curve = curve
 		_node = node
 		_duration = duration
-		_callback = callback
 	
 	func with_relative_target() -> NodeInterpolation:
 		_to_is_relative = true
@@ -73,6 +71,9 @@ class NodeInterpolation:
 	func with_updateble_target(new_target: Callable) -> NodeInterpolation:
 		_new_target_callback = new_target
 		return self
+	
+	func on_finish(finish_callback: Callable):
+		_callback = finish_callback
 	
 	func advance(elapsed_time: float) -> bool:
 		if _finished:
@@ -112,14 +113,13 @@ var _playing = false
 var _finished = false
 var _tracks: Array[InterpolationTrack] = []
 
-func interpolate_property(node: Node, path: NodePath, to: Variant, duration: float,
-	curve: Tween.TransitionType = Tween.TRANS_LINEAR, ease: Tween.EaseType = Tween.EASE_IN_OUT,
-	track: int = 0, callback: Callable = func(): pass) -> NodeInterpolation:
+func interpolate_property(node: Node, path: NodePath, to: Variant, duration: float, track: int = 0,
+	curve: Tween.TransitionType = Tween.TRANS_LINEAR, ease: Tween.EaseType = Tween.EASE_IN_OUT) ->\
+	NodeInterpolation:
 	
-	var node_interpol = NodeInterpolation.new(node, path, to, duration, curve,
-		ease, callback)
+	var node_interpol = NodeInterpolation.new(node, path, to, duration, curve, ease)
 	
-	if _tracks.size() < track + 1:
+	while _tracks.size() < track + 1:
 		_tracks.append(InterpolationTrack.new())
 	
 	_tracks[track].append(node_interpol)
