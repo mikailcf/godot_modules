@@ -2,7 +2,6 @@
 ## Custom interpoation class
 ##
 class_name Interpol
-extends Node
 
 class InterpolationTrack:
 	var _active_interpolation_index: int = -1
@@ -153,6 +152,9 @@ func play():
 
 func is_playing() -> bool:
 	return _playing
+
+func is_finished():
+	return _finished
 
 func rewind():
 	_elapsed_time = 0.0
