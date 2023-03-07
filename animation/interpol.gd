@@ -1,8 +1,11 @@
-## 
-## Custom interpoation class
+## Custom property interpoation class with support for moving targets
 ##
+## It also supports: sequencing and parallelism, curves, easings, relative target. It is supposed to
+## be used by keeping an instance of it and advancing the interpolation manually inside a method
+## like [method Node._process] or any other that provides a time delta.
 class_name Interpol
 
+## Interpol inner class used for sequencing and parallelism, it's not part of the public API.
 class InterpolationTrack:
 	var _active_interpolation_index: int = -1
 	var _interpolations: Array[NodeInterpolation] = []
@@ -12,17 +15,17 @@ class InterpolationTrack:
 	func _get_active_interpolation() -> NodeInterpolation:
 		return _interpolations[_active_interpolation_index]
 		
-	func append(interpolation: NodeInterpolation):
+	func _append(interpolation: NodeInterpolation):
 		if _active_interpolation_index == -1:
 			_active_interpolation_index = 0
 		
 		_interpolations.append(interpolation)
 	
-	func advance(elapsed_time: float) -> bool:
+	func _advance(elapsed_time: float) -> bool:
 		if _fininshed or _active_interpolation_index == -1:
 			return false
 			
-		var able_to_advance = _get_active_interpolation().advance(elapsed_time - _time_skip)
+		var able_to_advance = _get_active_interpolation()._advance(elapsed_time - _time_skip)
 		
 		if not able_to_advance:
 			_active_interpolation_index += 1
@@ -41,6 +44,7 @@ class InterpolationTrack:
 		_active_interpolation_index = 0
 		_time_skip = 0.0
 
+## Interpol inner class for storing each property interpolation.
 class NodeInterpolation:
 	var _node: Node
 	var _path: NodePath
@@ -64,18 +68,23 @@ class NodeInterpolation:
 		_node = node
 		_duration = duration
 	
+	## Builder style function for setting the target to be relative to the starting value, and not
+	## absolute.
 	func with_relative_target() -> NodeInterpolation:
 		_to_is_relative = true
 		return self
 	
+	## Builder style function for setting callback function that returns the new position for the
+	## target. It's called during the [method Interpol.advance] function call in the [Interpol] instance.
 	func with_updateble_target(new_target: Callable) -> NodeInterpolation:
 		_new_target_callback = new_target
 		return self
 	
+	## Sets the callback function to be called at the end of this property interpolation.
 	func on_finish(finish_callback: Callable):
 		_callback = finish_callback
 	
-	func advance(elapsed_time: float) -> bool:
+	func _advance(elapsed_time: float) -> bool:
 		if _finished:
 			return false
 		
@@ -113,6 +122,14 @@ var _playing = false
 var _finished = false
 var _tracks: Array[InterpolationTrack] = []
 
+## Creates a new property interpolation for a given node and property path. The starting value will
+## be the current property value when [method Interpol.advance] is called for the first time in a
+## given interpolation (that means that in cases where there are interpolations set up to be played
+## in sequence, each interpolation will set its starting point only when the track gets to it).[br][br]
+##
+## Use the [code]track[/code] parameter to achieve sequencing and parallelism: multiple calls to this
+## function with the same track value will be queued (in the same track); multiple calls to this
+## function with different track values will be played in parallel (in different tracks).
 func interpolate_property(node: Node, path: NodePath, to: Variant, duration: float, track: int = 0,
 	curve: Tween.TransitionType = Tween.TRANS_LINEAR, ease: Tween.EaseType = Tween.EASE_IN_OUT) ->\
 	NodeInterpolation:
@@ -122,10 +139,13 @@ func interpolate_property(node: Node, path: NodePath, to: Variant, duration: flo
 	while _tracks.size() < track + 1:
 		_tracks.append(InterpolationTrack.new())
 	
-	_tracks[track].append(node_interpol)
+	_tracks[track]._append(node_interpol)
 	
 	return node_interpol
 
+## Advances the interpolation tracks by [code]delta[/code] seconds. Marks the interpolation as
+## finished, if such is the case.[br][br]
+## Must be used after calling [method Interpol.play].
 func advance(delta: float):
 	if not _playing:
 		return
@@ -139,23 +159,28 @@ func advance(delta: float):
 	var finished = true
 	
 	for track in _tracks:
-		var able_to_advance = track.advance(_elapsed_time)
+		var able_to_advance = track._advance(_elapsed_time)
 		
 		if able_to_advance:
 			finished = false
 	
 	_finished = finished
 
+## Enables the interpolation to be advanced.
 func play():
 	if not _playing:
 		_playing = true
 
+## Returns the playing state.
 func is_playing() -> bool:
 	return _playing
 
+## Returns the finished state.
 func is_finished():
 	return _finished
 
+## Resets the playback values to the initial ones whilst keeping every track and node interpolation
+## information.
 func rewind():
 	_elapsed_time = 0.0
 	_playing = false
@@ -164,6 +189,7 @@ func rewind():
 	for track in _tracks:
 		track._rewind()
 
+## Empties all data stored by the interpolation instance.
 func clear():
 	_tracks = []
 	rewind()
