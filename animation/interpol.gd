@@ -176,10 +176,10 @@ func is_playing() -> bool:
 	return _playing
 
 ## Returns the finished state.
-func is_finished():
+func is_finished() -> bool:
 	return _finished
 
-## Resets the playback values to the initial ones whilst keeping every track and node interpolation
+## Resets the playback values to the initial ones whilst keeping original track and node interpolation
 ## information.
 func rewind():
 	_elapsed_time = 0.0
