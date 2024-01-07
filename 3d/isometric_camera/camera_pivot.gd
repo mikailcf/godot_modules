@@ -17,7 +17,7 @@ func _physics_process(delta: float) -> void:
 		return
 
 	var from := transform.origin
-	var to = _target_node.transform.origin
+	var to := _target_node.transform.origin
 
 	transform.origin = lerp(from, to, _speed * delta)
 	
