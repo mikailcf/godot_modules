@@ -200,13 +200,10 @@ _data = {
 }
 
 [sub_resource type="FontFile" id="3"]
+fallbacks = Array[Font]([ExtResource("2"), ExtResource("2")])
 subpixel_positioning = 0
 msdf_pixel_range = 14
 msdf_size = 128
-fallbacks = Array[Font]([ExtResource("2"), ExtResource("2")])
-face_index = null
-embolden = null
-transform = null
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
@@ -235,13 +232,10 @@ border_color = Color(0.8, 0.8, 0.8, 0)
 [sub_resource type="StyleBoxFlat" id="9"]
 
 [sub_resource type="FontFile" id="2"]
+fallbacks = Array[Font]([ExtResource("2"), ExtResource("2")])
 subpixel_positioning = 0
 msdf_pixel_range = 14
 msdf_size = 128
-fallbacks = Array[Font]([ExtResource("2"), ExtResource("2")])
-face_index = null
-embolden = null
-transform = null
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
