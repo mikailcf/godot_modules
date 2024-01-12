@@ -2,10 +2,11 @@
 
 ## Setup
 
-Needs to be set up as and Autoload.
+Needs to be set up as an Autoload.
 
 ## Creating actions and mappings
 
+Edit the `input_mapping` file, setting up your default action group and actions mapping.
 
 ## Using actions in yout game
 
