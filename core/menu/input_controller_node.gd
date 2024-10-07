@@ -12,4 +12,4 @@ func _on_NewGameButton_pressed() -> void:
 	$"..".start_game()
 
 func _on_QuitButton_pressed() -> void:
-	GameSingleton.quit()
+	$"..".request_quit_game.emit()

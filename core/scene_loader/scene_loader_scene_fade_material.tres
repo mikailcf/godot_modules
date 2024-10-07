@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cn241mpc3h1yn"]
 
-[ext_resource type="Shader" path="res://modules/scene_loader/swipe_fade.gdshader" id="1_rv81n"]
+[ext_resource type="Shader" path="res://modules/core/scene_loader/swipe_fade.gdshader" id="1_rv81n"]
 
 [resource]
 shader = ExtResource("1_rv81n")

@@ -1,11 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://cpqteevbc2fbs"]
+[gd_scene load_steps=23 format=3 uid="uid://cpqteevbc2fbs"]
 
-[ext_resource type="Script" path="res://modules/menu/new_game_button.gd" id="1"]
-[ext_resource type="FontFile" uid="uid://b71ypvfcn1gve" path="res://assets/fonts/kenney_mini.ttf" id="2"]
-[ext_resource type="Script" path="res://modules/menu/menu.gd" id="3"]
-[ext_resource type="Script" path="res://modules/menu/animation_controller_node.gd" id="5"]
-[ext_resource type="Material" uid="uid://bnf4haf01a5cj" path="res://modules/menu/blur_material.tres" id="5_0ju6v"]
-[ext_resource type="Script" path="res://modules/menu/input_controller_node.gd" id="6"]
+[ext_resource type="Script" path="res://modules/core/menu/new_game_button.gd" id="1"]
+[ext_resource type="Script" path="res://modules/core/menu/menu.gd" id="3"]
+[ext_resource type="Script" path="res://modules/core/menu/animation_controller_node.gd" id="5"]
+[ext_resource type="Material" uid="uid://bnf4haf01a5cj" path="res://modules/core/menu/blur_material.tres" id="5_0ju6v"]
+[ext_resource type="Script" path="res://modules/core/menu/input_controller_node.gd" id="6"]
 
 [sub_resource type="Animation" id="13"]
 length = 0.001
@@ -200,7 +199,6 @@ _data = {
 }
 
 [sub_resource type="FontFile" id="3"]
-fallbacks = Array[Font]([ExtResource("2"), ExtResource("2")])
 subpixel_positioning = 0
 msdf_pixel_range = 14
 msdf_size = 128
@@ -232,7 +230,6 @@ border_color = Color(0.8, 0.8, 0.8, 0)
 [sub_resource type="StyleBoxFlat" id="9"]
 
 [sub_resource type="FontFile" id="2"]
-fallbacks = Array[Font]([ExtResource("2"), ExtResource("2")])
 subpixel_positioning = 0
 msdf_pixel_range = 14
 msdf_size = 128

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dmrxxrp87oyl8"]
 
-[ext_resource type="Script" path="res://modules/scene_loader/scene_loader.gd" id="2"]
-[ext_resource type="Material" uid="uid://cn241mpc3h1yn" path="res://modules/scene_loader/scene_loader_scene_fade_material.tres" id="2_3cfxe"]
+[ext_resource type="Script" path="res://modules/core/scene_loader/scene_loader.gd" id="2"]
+[ext_resource type="Material" uid="uid://cn241mpc3h1yn" path="res://modules/core/scene_loader/scene_loader_scene_fade_material.tres" id="2_3cfxe"]
 
 [sub_resource type="Animation" id="1"]
 length = 0.001

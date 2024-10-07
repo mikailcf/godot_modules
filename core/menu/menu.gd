@@ -1,14 +1,13 @@
-class_name Menu
 extends CanvasLayer
 
-signal start_new_game
+signal request_play_game
+signal request_quit_game
 
 enum BGType { None = 0, Blur }
 
 var _pause: bool = false
 
 func _ready() -> void:
-	MenuSingleton.node = self
 	$Control.visible = false
 
 func show_menu(_pause: bool = false, animated: bool = false, bg_type: int = 0, duration: float = -1):
@@ -38,9 +37,12 @@ func start_game():
 	else:
 		hide_menu(true, 1)
 
+func quit_game():
+	request_quit_game.emit()
+
 func _on_AnimationControllerNode_finished_hiding_menu() -> void:
 	get_tree().paused = false
-	emit_signal("start_new_game")
+	request_play_game.emit()
 
 func _on_GameRoot_game_started(_timestamp) -> void:
 	$InputControllerNode.start_focus()
