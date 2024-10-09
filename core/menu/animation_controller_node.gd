@@ -51,5 +51,5 @@ func _on_MainAnimationPlayer_animation_finished(anim_name: String) -> void:
 	if anim_name == "hide_menu":
 		finished_hiding_menu.emit()
 #
-#	if anim_name == "show_menu":
-#		emit_signal("finished_showing_menu")
+	if anim_name == "show_menu":
+		finished_showing_menu.emit()

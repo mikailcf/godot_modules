@@ -4,8 +4,6 @@ signal did_launch_game(timestamp: float)
 
 func _ready():
 	did_launch_game.emit(Time.get_unix_time_from_system())
-	$Game/Menu.show_menu(false, true, 0, 1.0)
-	get_tree().paused = true
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_action_released("ui_cancel"):

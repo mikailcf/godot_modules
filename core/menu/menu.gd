@@ -5,12 +5,14 @@ signal request_quit_game
 
 enum BGType { None = 0, Blur }
 
-var _pause: bool = false
+var _is_paused: bool = false
 
 func _ready() -> void:
+	#pass
 	$Control.visible = false
 
-func show_menu(_pause: bool = false, animated: bool = false, bg_type: int = 0, duration: float = -1):
+func show_menu(should_pause: bool = false, animated: bool = false, bg_type: int = 0, duration: float = -1):
+	get_tree().paused = should_pause
 	$InputControllerNode.start_focus()
 	$AnimationControllerNode.show_menu(animated, bg_type, duration)
 
@@ -18,21 +20,18 @@ func hide_menu(animated: bool = false, duration: float = -1):
 	$AnimationControllerNode.hide_menu(animated, duration)
 
 func pause_game():
-	get_tree().paused = true
-	_pause = true
+	_is_paused = true
 	$Control/MarginContainer/HBoxContainer/MainMenuVBoxContainer/NewGameButton\
-		.configure(_pause)
+		.configure(_is_paused)
 
 	show_menu(true, true, BGType.Blur)
 
 func unpause_game():
-	_pause = false
+	_is_paused = false
 	hide_menu(true)
-	$Control/MarginContainer/HBoxContainer/MainMenuVBoxContainer/NewGameButton\
-		.configure(_pause)
 
 func start_game():
-	if _pause:
+	if _is_paused:
 		unpause_game()
 	else:
 		hide_menu(true, 1)

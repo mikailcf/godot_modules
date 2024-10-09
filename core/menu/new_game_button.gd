@@ -1,5 +1,5 @@
 extends Button
 
-func configure(pause: bool):
-	if pause:
+func configure(is_paused: bool):
+	if is_paused:
 		text = " resume game "
