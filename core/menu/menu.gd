@@ -3,6 +3,8 @@ extends CanvasLayer
 signal request_play_game
 signal request_quit_game
 
+@export var animation_duration: float = 0.01
+
 enum BGType { None = 0, Blur }
 
 var _is_paused: bool = false
@@ -11,12 +13,12 @@ func _ready() -> void:
 	#pass
 	$Control.visible = false
 
-func show_menu(should_pause: bool = false, animated: bool = false, bg_type: int = 0, duration: float = -1):
+func show_menu(should_pause: bool = false, animated: bool = false, bg_type: int = 0, duration: float = animation_duration):
 	get_tree().paused = should_pause
 	$InputControllerNode.start_focus()
 	$AnimationControllerNode.show_menu(animated, bg_type, duration)
 
-func hide_menu(animated: bool = false, duration: float = -1):
+func hide_menu(animated: bool = false, duration: float = animation_duration):
 	$AnimationControllerNode.hide_menu(animated, duration)
 
 func pause_game():
@@ -34,7 +36,7 @@ func start_game():
 	if _is_paused:
 		unpause_game()
 	else:
-		hide_menu(true, 1)
+		hide_menu(true)
 
 func quit_game():
 	request_quit_game.emit()

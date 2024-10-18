@@ -4,13 +4,13 @@ qualquer extensão de node:
 action node:
   - estender action node
   - imeplementar ação em `_do_action(_, _)`
-    - devolver `RUNNING` enquanto estiver rodando
-    - devolver `SUCCESS` ou `FAILURE` para terminar ação
+	- devolver `RUNNING` enquanto estiver rodando
+	- devolver `SUCCESS` ou `FAILURE` para terminar ação
 
 condition node:
   - estender condition node
   - imeplementar checagem em `_check_condition(_, _)`
-    - devolver `SUCCESS` ou `FAILURE`
+	- devolver `SUCCESS` ou `FAILURE`
 
 wait node:
   - não implementar nada
