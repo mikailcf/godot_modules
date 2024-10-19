@@ -3,22 +3,6 @@ extends Node
 class_name State
 
 @export var _enter_animation: String
-@export var _state: State.States
-
-enum States {
-	NONE = -1,
-	IDLE = 0,
-	RUNNING,
-	ATTACKING,
-	DEAD
-}
-
-enum Action {
-	MOVE = 0,
-	ATTACK,
-	GOT_HIT,
-	DIE,
-}
 
 func get_host() -> Node2D:
 	var parent = get_parent()
@@ -43,33 +27,31 @@ func get_animation_player() -> DirectionAnimationPlayer:
 		return parent.get_animation_player() as AnimationPlayer
 	else:
 		return null
-
-func will_enter(params = {}):
 	
+func change_state(state: Variant, params = {}, push = false):
+	var state_machine = get_state_machine()
+	state_machine.change_state(state, params, push)
+	
+func get_state() -> int:
+	return -1
+
+func will_enter(_params = {}):
 	pass
 
 func will_exit():
-	# tell parent
 	pass
 
-func get_state() -> int:
-	return _state
-	
-func change_state(state: States, params = {}, push = false):
-	var state_machine = get_state_machine()
-	state_machine.change_state(state, params, push)
-
-func process(delta: float):
+func process(_delta: float):
 	# move or check collision
 	pass
 
-func handle_input(event: InputEvent):
+func handle_input(_event: InputEvent):
 	# handle input event
 	pass
 
-func handle_action(action: State.Action, params = {}):
+func handle_action(_action, _params = {}):
 	# handle actions coming from the state machine
 	pass
 
-func on_animation_finished(animation: String):
+func on_animation_finished(_animation: String):
 	pass

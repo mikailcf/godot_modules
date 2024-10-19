@@ -7,7 +7,7 @@ extends BehaviorTreeNode
 func _ready() -> void:
 	assert(get_child_count() <= 2) #,"Condition node should have at most 2 children")
 
-func _tick(agent, blackboard: BlackBoard) -> int:
+func _tick(agent, blackboard: Blackboard) -> int:
 	var status = _check_condition(agent, blackboard)
 	
 	var temp = _children.duplicate()
@@ -21,5 +21,5 @@ func _tick(agent, blackboard: BlackBoard) -> int:
 	
 	return status
 
-func _check_condition(_agent, _blackboard: BlackBoard) -> int:
+func _check_condition(_agent, _blackboard: Blackboard) -> int:
 	return SUCCESS

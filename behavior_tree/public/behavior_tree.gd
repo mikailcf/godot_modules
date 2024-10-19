@@ -17,7 +17,7 @@ enum ProcessType {
 @onready var _root := get_child(0) as BehaviorTreeNode
 @onready var _agent = get_node(_agent_path) as Node
 @onready var _blackboard = \
-	get_node(_blackboard_path) as BlackBoard
+	get_node(_blackboard_path) as Blackboard
 
 func _ready():
 	assert(get_child_count() == 1) #,"Root node should have one child")

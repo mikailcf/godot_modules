@@ -4,7 +4,7 @@ class_name StateMachine
 
 @export var initial_state_val = 0 ## (State.States)
 
-var _states := [] as Array[State]
+var _states = []
 var _states_map = {}
 var _active = false
 
@@ -28,7 +28,7 @@ func _init_states():
 
 	var children = get_children()
 	for child in children:
-		var state := child as State
+		var state = child as State
 		if not state:
 			continue
 
@@ -53,9 +53,8 @@ func get_animation_player():
 	return _animation_player
 	
 
-func change_state(state: State.States, params = {}, push = false):
-	#_animation_player.stop_animation()
-	_animation_player.stop()
+func change_state(state, params = {}, push = false):
+	_animation_player.pause()
 
 	if not _active:
 		return
@@ -69,20 +68,6 @@ func change_state(state: State.States, params = {}, push = false):
 
 	_states.front().will_enter(params)
 	
-func handle_action(action: State.Action, params = {}):
+func handle_action(_action, _params = {}):
 	if not _active:
 		return
-		
-	if action == State.Action.DIE:
-		if _states.front().get_state() == State.States.DEAD:
-			return
-		change_state(State.States.DEAD, {})
-		set_active(false)
-		return
-
-	if action == State.Action.ATTACK:
-		if _states.front().get_state() == State.States.ATTACKING:
-			return
-		change_state(State.States.ATTACKING, {}, true)
-
-	_states.front().handle_action(action, params)

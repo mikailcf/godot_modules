@@ -13,9 +13,9 @@ enum {
 func will_exit(_metadata: Dictionary):
 	pass
 
-func tick(agent, blackboard: BlackBoard) -> int:
+func tick(agent, blackboard: Blackboard) -> int:
 	var status = _tick(agent, blackboard)
 	return status
 
-func _tick(_agent, _blackboard: BlackBoard) -> int:
+func _tick(_agent, _blackboard: Blackboard) -> int:
 	return SUCCESS

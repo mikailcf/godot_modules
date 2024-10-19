@@ -1,5 +1,5 @@
 @icon("../icons/blackboard.svg")
-class_name BlackBoard
+class_name Blackboard
 extends Node
 
 var _blackboard = {}
