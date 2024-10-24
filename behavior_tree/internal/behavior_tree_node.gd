@@ -1,7 +1,7 @@
 class_name BehaviorTreeNode
 extends Node
 
-enum {
+enum BehaviorResult {
 	FAILURE,
 	SUCCESS,
 	RUNNING,
@@ -13,9 +13,5 @@ enum {
 func will_exit(_metadata: Dictionary):
 	pass
 
-func tick(agent, blackboard: Blackboard) -> int:
-	var status = _tick(agent, blackboard)
-	return status
-
-func _tick(_agent, _blackboard: Blackboard) -> int:
-	return SUCCESS
+func _tick(_host, _blackboard) -> int:
+	return BehaviorResult.SUCCESS

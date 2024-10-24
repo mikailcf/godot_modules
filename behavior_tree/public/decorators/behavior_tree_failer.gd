@@ -2,10 +2,10 @@
 class_name BehaviorTreeFailer
 extends BehaviorTreeDecorator
 
-func _tick(_agent, _blackboard) -> int:
-	var status = _child.tick(_agent, _blackboard)
+func _tick(_host, _blackboard) -> int:
+	var status = _child._tick(_host, _blackboard)
 
-	if status == RUNNING:
-		return RUNNING
+	if status == BehaviorResult.RUNNING:
+		return BehaviorResult.RUNNING
 		
-	return FAILURE
+	return BehaviorResult.FAILURE

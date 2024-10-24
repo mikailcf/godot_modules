@@ -11,27 +11,24 @@ enum ProcessType {
 @export var _process_type: ProcessType:
 	set = set_process_type
 @export var _enabled: bool = true
-@export var _agent_path: NodePath
-@export var _blackboard_path: NodePath
 
 @onready var _root := get_child(0) as BehaviorTreeNode
-@onready var _agent = get_node(_agent_path) as Node
-@onready var _blackboard = \
-	get_node(_blackboard_path) as Blackboard
+@export var _host: Node
+@export var _blackboard: Blackboard
 
 func _ready():
-	assert(get_child_count() == 1) #,"Root node should have one child")
+	assert(get_child_count() == 1) # Tree node should have one child, the root
 	set_process_type(ProcessType.PHYSICS_PROCESS)
 
 func _process(delta: float):
-	tick(delta)
+	_tick(delta)
 	
 func _physics_process(delta: float):
-	tick(delta)
+	_tick(delta)
 
-func tick(delta):
+func _tick(delta):
 	_blackboard.delta = delta
-	_root.tick(_agent, _blackboard)
+	_root._tick(_host, _blackboard)
 
 func enable():
 	_enabled = true

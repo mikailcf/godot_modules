@@ -2,8 +2,8 @@
 class_name BehaviorTreeParallel
 extends BehaviorTreeComposite
 
-func _tick(_agent, _blackboard):
+func _tick(_host, _blackboard):
 	for child in children:
-		child.tick(_agent, _blackboard)
+		child._tick(_host, _blackboard)
 
-	return SUCCESS
+	return BehaviorResult.SUCCESS

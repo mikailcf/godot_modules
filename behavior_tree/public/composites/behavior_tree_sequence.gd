@@ -9,16 +9,16 @@ extends BehaviorTreeComposite
 func _reset():
 	_successful_index = 0
 
-func _tick(_agent, _blackboard):
+func _tick(_host, _blackboard):
 	for child in children:
 		if child.get_index() < _successful_index \
 			and _skip_previous_success:
 			continue
 
-		var status = child.tick(_agent, _blackboard)
+		var status = child._tick(_host, _blackboard)
 
-		if status != SUCCESS:
-			if status == FAILURE:
+		if status != BehaviorResult.SUCCESS:
+			if status == BehaviorResult.FAILURE:
 				_reset()
 			return status
 		
@@ -27,4 +27,4 @@ func _tick(_agent, _blackboard):
 	if _successful_index == children.size():
 		_reset()
 
-	return SUCCESS
+	return BehaviorResult.SUCCESS

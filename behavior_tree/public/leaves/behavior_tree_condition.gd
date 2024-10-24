@@ -7,19 +7,19 @@ extends BehaviorTreeNode
 func _ready() -> void:
 	assert(get_child_count() <= 2) #,"Condition node should have at most 2 children")
 
-func _tick(agent, blackboard: Blackboard) -> int:
-	var status = _check_condition(agent, blackboard)
+func _tick(host, blackboard) -> int:
+	var status = _check_condition(host, blackboard)
 	
 	var temp = _children.duplicate()
 	var success_child = temp.pop_front() as BehaviorTreeNode
 	var failure_child = temp.pop_front() as BehaviorTreeNode
 	
-	if status == SUCCESS and success_child != null:
-		return success_child.tick(agent, blackboard)
-	elif status == FAILURE and failure_child != null:
-		return failure_child.tick(agent, blackboard)
+	if status == BehaviorResult.SUCCESS and success_child != null:
+		return success_child._tick(host, blackboard)
+	elif status == BehaviorResult.FAILURE and failure_child != null:
+		return failure_child._tick(host, blackboard)
 	
 	return status
 
-func _check_condition(_agent, _blackboard: Blackboard) -> int:
-	return SUCCESS
+func _check_condition(_host, _blackboard) -> int:
+	return BehaviorResult.SUCCESS

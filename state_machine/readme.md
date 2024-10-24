@@ -1,6 +1,10 @@
 # State Machine
 
+## Setup
 Copy the folders inside `./script_templates` to the project's `script_templates` folder.
+
+
+## Usage
 
 Add a state machine node to your scene. Right-click it and click extend script, choosing the empty state machine template.
 

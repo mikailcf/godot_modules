@@ -17,14 +17,14 @@ func _create_timer():
 	_timer.one_shot = true
 	add_child(_timer)
 
-func _tick(_agent, _blackboard: Blackboard) -> int:
+func _tick(_host, _blackboard) -> int:
 	if _triggered and _timer.is_stopped():
 		if not _one_shot:
 			_triggered = false
-		return SUCCESS
+		return BehaviorResult.SUCCESS
 
 	if not _triggered:
 		_triggered = true
 		_timer.start(_wait_time)
 
-	return RUNNING
+	return BehaviorResult.RUNNING
