@@ -1,6 +1,6 @@
-extends Node
-
+@icon("res://modules/state_machine/icons/state.svg")
 class_name State
+extends Node
 
 @export var _enter_animation: String
 

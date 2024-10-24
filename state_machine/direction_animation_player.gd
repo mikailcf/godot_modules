@@ -1,6 +1,5 @@
-extends AnimationPlayer
-
 class_name DirectionAnimationPlayer
+extends AnimationPlayer
 
 func handle_direction(_direction: Vector2):
 	pass

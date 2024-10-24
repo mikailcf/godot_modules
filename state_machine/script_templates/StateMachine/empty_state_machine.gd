@@ -1,6 +1,5 @@
-extends StateMachine
-
 #class_name YourStateMachine
+extends StateMachine
 
 #enum State {
 	#NONE = -1,
