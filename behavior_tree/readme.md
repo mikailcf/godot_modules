@@ -10,9 +10,6 @@ Copy the folders inside `./script_templates` to the project's `script_templates`
 1. Add behavior tree nodes as children of this behavior tree node.
 	1. The only nodes that should have custom implementation are: `BehaviorTreeCondition` and `BehaviorTreeAction`. This should be done by right-clicking the node after adding it and clicking extend script, choosing the empty template.
 
-qualquer extensão de node:
-	- caso necessário, implementar `_metadata()` que fornecerá dados para os `will_exit(_)` no caso de interrupções
-
 action node:
 	- folha
 	- estender action node

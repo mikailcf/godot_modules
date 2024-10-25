@@ -15,7 +15,7 @@ func _tick(_host, _blackboard):
 			and _skip_previous_failure:
 			continue
 
-		var status = child._tick(_host, _blackboard)
+		var status = _tick_child(child, _host, _blackboard)
 
 		if status != BehaviorResult.FAILURE:
 			if status == BehaviorResult.SUCCESS:

@@ -4,6 +4,6 @@ extends BehaviorTreeComposite
 
 func _tick(_host, _blackboard):
 	for child in children:
-		child._tick(_host, _blackboard)
+		_tick_child(child, _host, _blackboard)
 
 	return BehaviorResult.SUCCESS
