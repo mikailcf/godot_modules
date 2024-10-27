@@ -14,7 +14,7 @@ func _will_tick():
 	name = _running_name
 	
 func _did_tick(result: BehaviorResult):
-	if result != BehaviorResult.RUNNING:
+	if result == BehaviorResult.SUCCESS:
 		name = _og_name
 	#pass
 
