@@ -17,6 +17,7 @@ action node:
 		- can use signals to execute action or call specific outside nodes/functions to capture result, but being more coupled this way
 		- devolver `RUNNING` enquanto estiver rodando
 		- devolver `SUCCESS` ou `FAILURE` para terminar ação
+	- implement `_interrupt(_)` function
 
 condition node:
 	- máximo 2 filhos
@@ -69,3 +70,9 @@ succeeder node:
 	- 1 child
 	- returns `RUNNING` if child is running
 	- returns `SUCCESS` if child is not nunning
+	
+interrupt node:
+	- 1 child
+	- return exactly what its child returns
+	- has references to actions that should be interrupted as a group
+	- interruption occuers when the child of another interrupt node is `RUNNING`
