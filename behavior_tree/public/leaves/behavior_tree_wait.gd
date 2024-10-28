@@ -1,9 +1,10 @@
 @icon("../../icons/wait.svg")
 class_name BehaviorTreeWait
-extends BehaviorTreeLeaf
+extends BehaviorTreeAction
 
 @export var _wait_time: float = 1.0
 @export var _one_shot: bool = false
+@export var _reset_on_interrupt: bool = true
 
 var _timer: Timer
 var _triggered = false
@@ -17,7 +18,11 @@ func _create_timer():
 	_timer.one_shot = true
 	add_child(_timer)
 
-func _tick(_host, _blackboard) -> int:
+func _will_exit(blackboard):
+	if _reset_on_interrupt:
+		_triggered = false
+
+func _do_action(_host, _blackboard, _delta) -> int:
 	if _triggered and _timer.is_stopped():
 		if not _one_shot:
 			_triggered = false

@@ -2,8 +2,8 @@
 class_name BehaviorTreeSucceeder
 extends BehaviorTreeDecorator
 
-func _tick(_host, _blackboard) -> int:
-	var status = _tick_child(child, _host, _blackboard)
+func _tick(host, blackboard) -> int:
+	var status = child.tick(host, blackboard)
 
 	if status == BehaviorResult.RUNNING:
 		return BehaviorResult.RUNNING

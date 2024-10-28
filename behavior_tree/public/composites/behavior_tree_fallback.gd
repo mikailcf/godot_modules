@@ -9,13 +9,13 @@ extends BehaviorTreeComposite
 func _reset():
 	_failure_index = 0
 
-func _tick(_host, _blackboard):
+func _tick(host, blackboard):
 	for child in children:
 		if child.get_index() < _failure_index \
 			and _skip_previous_failure:
 			continue
 
-		var status = _tick_child(child, _host, _blackboard)
+		var status = child.tick(host, blackboard)
 
 		if status != BehaviorResult.FAILURE:
 			if status == BehaviorResult.SUCCESS:

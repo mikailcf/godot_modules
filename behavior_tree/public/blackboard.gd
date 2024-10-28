@@ -4,7 +4,9 @@ extends Node
 
 var _blackboard = {}
 var delta: float
+var running_actions: Array[BehaviorTreeAction] = []
 
+# TODO: consider removing these dictionary methods
 func set_value(key, value, scope = 'default'):
 	if not _blackboard.has(scope):
 		_blackboard[scope] = {}

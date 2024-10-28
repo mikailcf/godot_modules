@@ -16,6 +16,8 @@ enum ProcessType {
 @export var _host: Node
 @export var _blackboard: Blackboard
 
+var _running_actions: Array[BehaviorTreeNode] = []
+
 func _ready():
 	assert(get_child_count() == 1) # Tree node should have one child, the root
 	set_process_type(ProcessType.PHYSICS_PROCESS)
@@ -28,7 +30,7 @@ func _physics_process(delta: float):
 
 func _tick(delta):
 	_blackboard.delta = delta
-	_root._tick(_host, _blackboard)
+	_root.tick(_host, _blackboard)
 
 func enable():
 	_enabled = true
