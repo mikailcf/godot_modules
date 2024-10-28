@@ -1,4 +1,4 @@
-@icon("../../icons/fallback.svg")
+@icon("../../../icons/fallback.svg")
 class_name BehaviorTreeFallback
 extends BehaviorTreeComposite
 

@@ -1,4 +1,4 @@
-@icon("../../icons/parallel.svg")
+@icon("../../../icons/parallel.svg")
 class_name BehaviorTreeParallel
 extends BehaviorTreeComposite
 

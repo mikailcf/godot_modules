@@ -1,5 +1,5 @@
-@icon("../../icons/succeeder.svg")
-class_name BehaviorTreeSucceeder
+@icon("../../../icons/failer.svg")
+class_name BehaviorTreeFailer
 extends BehaviorTreeDecorator
 
 func _tick(host, blackboard) -> int:
@@ -7,5 +7,5 @@ func _tick(host, blackboard) -> int:
 
 	if status == BehaviorResult.RUNNING:
 		return BehaviorResult.RUNNING
-
-	return BehaviorResult.SUCCESS
+		
+	return BehaviorResult.FAILURE

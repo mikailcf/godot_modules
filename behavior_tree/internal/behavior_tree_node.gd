@@ -13,9 +13,6 @@ enum BehaviorResult {
 func _will_tick():
 	pass
 
-func _will_exit(blackboard):
-	pass
-
 func _did_tick(result: BehaviorResult, blackboard: Blackboard):
 	if result == BehaviorResult.RUNNING:
 		name = _running_name

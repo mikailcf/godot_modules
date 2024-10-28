@@ -3,7 +3,7 @@ extends BehaviorTreeAction
 signal act
 
 # blackboard should have the type YourBlackboard
-func _will_exit(blackboard: Blackboard):
+func _interrupt(blackboard: Blackboard):
 	pass
 
 # blackboard should have the type YourBlackboard

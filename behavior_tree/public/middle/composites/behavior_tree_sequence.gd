@@ -1,4 +1,4 @@
-@icon("../../icons/sequence.svg")
+@icon("../../../icons/sequence.svg")
 class_name BehaviorTreeSequence
 extends BehaviorTreeComposite
 

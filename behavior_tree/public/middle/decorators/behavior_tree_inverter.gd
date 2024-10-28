@@ -1,4 +1,4 @@
-@icon("../../icons/inverter.svg")
+@icon("../../../icons/inverter.svg")
 class_name BehaviorTreeInverter
 extends BehaviorTreeDecorator
 
