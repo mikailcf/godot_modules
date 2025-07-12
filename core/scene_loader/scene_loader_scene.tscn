@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dmrxxrp87oyl8"]
 
-[ext_resource type="Script" path="res://modules/core/scene_loader/scene_loader.gd" id="2"]
+[ext_resource type="Script" uid="uid://yufwd1hvxggc" path="res://modules/core/scene_loader/scene_loader.gd" id="2"]
 [ext_resource type="Material" uid="uid://cn241mpc3h1yn" path="res://modules/core/scene_loader/scene_loader_scene_fade_material.tres" id="2_3cfxe"]
 
 [sub_resource type="Animation" id="1"]
@@ -35,8 +35,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xaefn"]
 _data = {
-"RESET": SubResource("1"),
-"fade_animation": SubResource("4")
+&"RESET": SubResource("1"),
+&"fade_animation": SubResource("4")
 }
 
 [node name="SceneLoader" type="Node"]

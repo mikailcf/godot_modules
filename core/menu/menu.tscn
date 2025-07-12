@@ -1,10 +1,10 @@
 [gd_scene load_steps=23 format=3 uid="uid://cpqteevbc2fbs"]
 
-[ext_resource type="Script" path="res://modules/core/menu/new_game_button.gd" id="1"]
-[ext_resource type="Script" path="res://modules/core/menu/menu.gd" id="3"]
-[ext_resource type="Script" path="res://modules/core/menu/animation_controller_node.gd" id="5"]
+[ext_resource type="Script" uid="uid://dtmtuatbhq058" path="res://modules/core/menu/new_game_button.gd" id="1"]
+[ext_resource type="Script" uid="uid://cty6n7dddtryc" path="res://modules/core/menu/menu.gd" id="3"]
+[ext_resource type="Script" uid="uid://cao0fp4ac4gku" path="res://modules/core/menu/animation_controller_node.gd" id="5"]
 [ext_resource type="Material" uid="uid://bnf4haf01a5cj" path="res://modules/core/menu/blur_material.tres" id="5_0ju6v"]
-[ext_resource type="Script" path="res://modules/core/menu/input_controller_node.gd" id="6"]
+[ext_resource type="Script" uid="uid://bx1c3orwybnm8" path="res://modules/core/menu/input_controller_node.gd" id="6"]
 
 [sub_resource type="Animation" id="13"]
 length = 0.001
@@ -89,9 +89,9 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5k5kw"]
 _data = {
-"RESET": SubResource("13"),
-"hide_menu": SubResource("14"),
-"show_menu": SubResource("12")
+&"RESET": SubResource("13"),
+&"hide_menu": SubResource("14"),
+&"show_menu": SubResource("12")
 }
 
 [sub_resource type="Animation" id="16"]
@@ -192,10 +192,10 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_py1ie"]
 _data = {
-"RESET": SubResource("16"),
-"hide_blur": SubResource("17"),
-"none": SubResource("19"),
-"show_blur": SubResource("18")
+&"RESET": SubResource("16"),
+&"hide_blur": SubResource("17"),
+&"none": SubResource("19"),
+&"show_blur": SubResource("18")
 }
 
 [sub_resource type="FontFile" id="3"]
@@ -264,13 +264,13 @@ script = ExtResource("5")
 [node name="MainAnimationPlayer" type="AnimationPlayer" parent="AnimationControllerNode"]
 root_node = NodePath("../..")
 libraries = {
-"": SubResource("AnimationLibrary_5k5kw")
+&"": SubResource("AnimationLibrary_5k5kw")
 }
 
 [node name="BGFXAnimationPlayer" type="AnimationPlayer" parent="AnimationControllerNode"]
 root_node = NodePath("../..")
 libraries = {
-"": SubResource("AnimationLibrary_py1ie")
+&"": SubResource("AnimationLibrary_py1ie")
 }
 
 [node name="Control" type="Control" parent="."]

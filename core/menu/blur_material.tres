@@ -4,4 +4,4 @@
 
 [resource]
 shader = ExtResource("1_8gu34")
-shader_parameter/blur_amount = null
+shader_parameter/blur_amount = 0.0

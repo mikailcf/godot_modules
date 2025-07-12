@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d31saqmqaepge"]
 
-[ext_resource type="Script" path="res://modules/3d/isometric_camera/camera_pivot.gd" id="1_stpdf"]
+[ext_resource type="Script" uid="uid://c33l1j7j4jinw" path="res://modules/3d/isometric_camera/camera_pivot.gd" id="1_stpdf"]
 
 [node name="CameraPivot" type="Marker3D"]
 script = ExtResource("1_stpdf")
