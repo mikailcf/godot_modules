@@ -65,7 +65,8 @@ func change_state(state, params = {}, push = false):
 	if state != -1:
 		_states.push_front(_states_map[state])
 
-	_states.front().will_enter(params)
+	if _states.size() > 0:
+		_states.front().will_enter(params)
 	
 func handle_action(_action, _params = {}):
 	if not _active:

@@ -32,6 +32,9 @@ func change_state(state: Variant, params = {}, push = false):
 	var state_machine = get_state_machine()
 	state_machine.change_state(state, params, push)
 	
+func pop_state():
+	change_state(-1)
+	
 func get_state() -> int:
 	return -1
 
