@@ -8,7 +8,6 @@ Copy the folders inside `./script_templates` to the project's `script_templates`
 1. Add a blackboard node to your scene.
 1. Add a behavior tree node to your scene and choose its blackboard node in the editor.
 1. Add behavior tree nodes as children of this behavior tree node.
-	1. The only nodes that should have custom implementation are: `BehaviorTreeCondition` and `BehaviorTreeAction`. This should be done by right-clicking the node after adding it and clicking extend script, choosing the empty template.
 
 action node:
 	- folha
@@ -75,4 +74,4 @@ interrupt node:
 	- 1 child
 	- return exactly what its child returns
 	- has references to actions that should be interrupted as a group
-	- interruption occuers when the child of another interrupt node is `RUNNING`
+	- interruption occurs when the child of another interrupt node is `RUNNING`
